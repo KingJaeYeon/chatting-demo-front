@@ -1,5 +1,11 @@
+import {Navbar} from "./Navbar.tsx";
+import {Search} from "./Search.tsx";
+
 export function Sidebar() {
     return (
-        <div>Sidebar</div>
+        <div className={'sidebar'}>
+            <Navbar/>
+            <Search/>
+        </div>
     )
 }
