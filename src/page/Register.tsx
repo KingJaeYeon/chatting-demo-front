@@ -1,3 +1,4 @@
+import Add from '../img/addAvatar.png';
 export function Register() {
     return (
             <div className={'formContainer'}>
@@ -10,7 +11,8 @@ export function Register() {
                         <input type="password" placeholder={'password'}/>
                         <input type="file" id='file' hidden={true}/>
                         <label htmlFor={'file'}>
-                            <img />
+                            <img src={Add} alt={'add image'}/>
+                            <span>Add an avatar</span>
                         </label>
                         <button>Sign up</button>
                     </form>
