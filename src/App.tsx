@@ -1,12 +1,11 @@
-import './App.css'
-import {Register} from "./page/Register.tsx";
-import './style.scss'
-import {Login} from "./page/Login.tsx";
-import {Home} from "./page/Home.tsx";
-function App() {
+import "./App.css";
+import { Register } from "./page/Register.tsx";
+import "./style.scss";
+import { Login } from "./page/Login.tsx";
+import { Home } from "./page/Home.tsx";
 
-  return (<Home/>
-  )
+function App() {
+  return <Home />;
 }
 
-export default App
+export default App;

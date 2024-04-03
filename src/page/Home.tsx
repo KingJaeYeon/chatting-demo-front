@@ -1,13 +1,13 @@
-import {Sidebar} from "../components/Sidebar.tsx";
-import {Chat} from "../components/Chat.tsx";
+import { Sidebar } from "../components/Sidebar.tsx";
+import { Chat } from "../components/Chat.tsx";
 
 export function Home() {
-    return (
-          <div className={'home'}>
-              <div className={'container'}>
-                  <Sidebar/>
-                  <Chat/>
-              </div>
-          </div>
-    )
+  return (
+    <div className={"home"}>
+      <div className={"container"}>
+        <Sidebar />
+        <Chat />
+      </div>
+    </div>
+  );
 }
