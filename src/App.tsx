@@ -5,7 +5,7 @@ import { Login } from "./page/Login.tsx";
 import { Home } from "./page/Home.tsx";
 
 function App() {
-  return <Home />;
+  return <Register />;
 }
 
 export default App;
