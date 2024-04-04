@@ -24,6 +24,7 @@ export function Register() {
 
       uploadTask.on(
         "state_changed",
+        () => {},
         () => {
           setErr(true);
         },
@@ -35,14 +36,14 @@ export function Register() {
               displayName,
               photoURL: downloadURL,
             });
+            console.log("start");
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
               displayName,
               email,
               photoURL: downloadURL,
-            })
-              .then(() => console.log("Document successfully written!"))
-              .catch((e) => console.error("Error writing document: ", e));
+            });
+            await setDoc(doc(db, "userChats", res.user.uid), {});
           });
         },
       );
