@@ -5,7 +5,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { auth, db, storage } from "../firebase.ts";
 import Add from "../img/addAvatar.png";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Register() {
   const [err, setErr] = useState(false);
@@ -71,7 +71,9 @@ export function Register() {
           <button>Sign up</button>
           {err && <span>Something went wrong</span>}
         </form>
-        <p>You do have an Account? Login</p>
+        <p>
+          You do have an Account? <Link to={"/login"}>Login</Link>
+        </p>
       </div>
     </div>
   );
