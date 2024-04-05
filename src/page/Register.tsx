@@ -5,10 +5,11 @@ import { doc, setDoc } from "firebase/firestore";
 import { auth, db, storage } from "../firebase.ts";
 import Add from "../img/addAvatar.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Register() {
   const [err, setErr] = useState(false);
-
+  const navigate = useNavigate();
   async function handleSubmit(e: any) {
     e.preventDefault();
     const displayName = e.target[0].value;
@@ -44,6 +45,7 @@ export function Register() {
               photoURL: downloadURL,
             });
             await setDoc(doc(db, "userChats", res.user.uid), {});
+            navigate("/");
           });
         },
       );
