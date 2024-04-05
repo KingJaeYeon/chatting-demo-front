@@ -1,3 +1,5 @@
+import { auth } from "../firebase.ts";
+import { signOut } from "firebase/auth";
 export function Navbar() {
   return (
     <div className={"navbar"}>
@@ -8,7 +10,7 @@ export function Navbar() {
           alt=""
         />
         <span>Park</span>
-        <button>logout</button>
+        <button onClick={() => signOut(auth)}>logout</button>
       </div>
     </div>
   );

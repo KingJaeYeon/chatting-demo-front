@@ -18,7 +18,7 @@ export function Register() {
     const file = e.target[3].files[0];
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-
+      console.log(res);
       const storageRef = ref(storage, displayName);
 
       const uploadTask = uploadBytesResumable(storageRef, file);
