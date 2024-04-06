@@ -13,6 +13,7 @@
     "@firebase/app-types": "^0.9.1",
     "@firebase/firestore-compat": "^0.3.28",
     "@types/uuid": "^9.0.8",
+    "axios": "^1.6.8",
     "firebase": "^10.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
