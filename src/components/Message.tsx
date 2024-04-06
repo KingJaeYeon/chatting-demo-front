@@ -1,4 +1,10 @@
-export function Message() {
+import { useAuthContext } from "../store/authStore.ts";
+import { useChatContext } from "../store/chatStore.ts";
+
+export function Message({ message }: { message: any }) {
+  const { user } = useAuthContext();
+  const { data } = useChatContext();
+
   return (
     <div className={"message owner"}>
       <div className="messageInfo">

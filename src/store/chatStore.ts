@@ -8,7 +8,7 @@ type Props = {
 
 const useChatStore = create<Props>((setState) => ({
   data: {
-    chatId: null,
+    chatId: "null",
     user: {},
   },
   dispatch: "",
@@ -17,4 +17,4 @@ const useChatStore = create<Props>((setState) => ({
   },
 }));
 
-export const useChat = () => useChatStore();
+export const useChatContext = () => useChatStore();

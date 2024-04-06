@@ -1,12 +1,12 @@
 import React, { useEffect, useReducer } from "react";
 import { useAuthContext } from "../store/authStore.ts";
-import { useChat } from "../store/chatStore.ts";
+import { useChatContext } from "../store/chatStore.ts";
 
 export function ChatContext({ children }: { children: React.ReactNode }) {
   const { user: currentUser } = useAuthContext();
-  const { init } = useChat();
+  const { init } = useChatContext();
   const INITIAL_STATE = {
-    chatId: null,
+    chatId: "null",
     user: {},
   };
 
@@ -16,9 +16,9 @@ export function ChatContext({ children }: { children: React.ReactNode }) {
         return {
           user: action.payload,
           chatId:
-            currentUser.uid > action.payload.uid.uid
-              ? currentUser.uid + action.payload.uid.uid
-              : action.payload.uid.uid + currentUser.uid,
+            currentUser?.uid > action?.payload.uid
+              ? currentUser.uid + action.payload.uid
+              : action.payload.uid + currentUser.uid,
         };
       default:
         return state;

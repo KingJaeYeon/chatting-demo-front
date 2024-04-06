@@ -13,6 +13,7 @@ import { AuthContextProvider } from "./context/AuthContext.tsx";
 import { useAuthContext } from "./store/authStore.ts";
 import { Login } from "./page/Login.tsx";
 import { Register } from "./page/Register.tsx";
+import { ChatContext } from "./context/ChatContext.tsx";
 
 const PrivateRoute = ({ children }: { children: any }) => {
   const { user } = useAuthContext();
@@ -38,7 +39,9 @@ const router = createBrowserRouter(
 function App() {
   return (
     <AuthContextProvider>
-      <RouterProvider router={router} />
+      <ChatContext>
+        <RouterProvider router={router} />
+      </ChatContext>
     </AuthContextProvider>
   );
 }
