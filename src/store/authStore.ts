@@ -5,7 +5,7 @@ type Props = {
   init: (user: any) => void;
 };
 
-const useAuthStore = create<Props>((setState, getState, store) => ({
+const useAuthStore = create<Props>((setState) => ({
   user: null,
   init: (user) => {
     setState({ user });

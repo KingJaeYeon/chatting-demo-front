@@ -9,7 +9,7 @@ import "./App.css";
 import "./style.scss";
 import { Home } from "./page/Home.tsx";
 
-import { AuthContextProvider } from "./components/AuthContext.tsx";
+import { AuthContextProvider } from "./context/AuthContext.tsx";
 import { useAuthContext } from "./store/authStore.ts";
 import { Login } from "./page/Login.tsx";
 import { Register } from "./page/Register.tsx";
