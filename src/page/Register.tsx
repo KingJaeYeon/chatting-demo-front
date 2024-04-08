@@ -1,11 +1,7 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
-
-import { auth, db, storage } from "../firebase.ts";
 import Add from "../img/addAvatar.png";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { register } from "../service/authService.ts";
 
 export function Register() {
   const [err, setErr] = useState(false);
@@ -17,38 +13,8 @@ export function Register() {
     const password = e.target[2].value;
     const file = e.target[3].files[0];
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(res);
-      const storageRef = ref(storage, displayName);
-
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        () => {},
-        () => {
-          setErr(true);
-        },
-        () => {
-          // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateProfile(res.user, {
-              displayName,
-              photoURL: downloadURL,
-            });
-            console.log("start");
-            await setDoc(doc(db, "users", res.user.uid), {
-              uid: res.user.uid,
-              displayName,
-              email,
-              photoURL: downloadURL,
-            });
-            await setDoc(doc(db, "userChats", res.user.uid), {});
-            navigate("/");
-          });
-        },
-      );
+      await register({ displayName, email, password, icon: file });
+      // navigate("/login");
     } catch (e) {
       setErr(true);
     }

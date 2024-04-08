@@ -25,7 +25,15 @@ const onSuccess = function (response: any) {
 };
 
 const onError = function (error: any) {
-  return error;
+  // 전체 에러 객체 로깅
+  console.log("Error Object:", error);
+  // 응답이 있는 경우, 상세한 응답 정보 로깅
+  if (error.response) {
+    console.log("Error Response:", error.response);
+  }
+  // 에러 메시지 로깅
+  console.log("Error Message:", error.message);
+  return Promise.reject(error);
 };
 
 export const request = function (options: AxiosRequestConfig) {

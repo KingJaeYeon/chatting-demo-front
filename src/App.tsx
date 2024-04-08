@@ -9,11 +9,12 @@ import "./App.css";
 import "./style.scss";
 import { Home } from "./page/Home.tsx";
 
-import { AuthContextProvider } from "./context/AuthContext.tsx";
+import { QueryProvider } from "./context/QueryProvider.tsx";
 import { useAuthContext } from "./store/authStore.ts";
 import { Login } from "./page/Login.tsx";
 import { Register } from "./page/Register.tsx";
 import { ChatContext } from "./context/ChatContext.tsx";
+import { Toaster } from "react-hot-toast";
 
 const PrivateRoute = ({ children }: { children: any }) => {
   const { user } = useAuthContext();
@@ -38,11 +39,12 @@ const router = createBrowserRouter(
 );
 function App() {
   return (
-    <AuthContextProvider>
+    <QueryProvider>
       <ChatContext>
+        <Toaster />
         <RouterProvider router={router} />
       </ChatContext>
-    </AuthContextProvider>
+    </QueryProvider>
   );
 }
 

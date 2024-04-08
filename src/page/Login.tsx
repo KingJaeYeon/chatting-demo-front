@@ -1,9 +1,7 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase.ts";
-
 import { useState } from "react";
 import { useAuthContext } from "../store/authStore.ts";
 import { Link, useNavigate } from "react-router-dom";
+import { login, test } from "../service/authService.ts";
 
 export function Login() {
   const [err, setErr] = useState(false);
@@ -14,9 +12,9 @@ export function Login() {
     const email = e.target[0].value;
     const password = e.target[1].value;
     try {
-      const res = await signInWithEmailAndPassword(auth, email, password);
+      const res = await login({ email, password });
       init(res.user);
-      navigate("/");
+      // navigate("/");
     } catch (e) {
       setErr(true);
     }
@@ -35,6 +33,14 @@ export function Login() {
         <p>
           You don't have an Account? <Link to={"/register"}>Register</Link>
         </p>
+        <button
+          onClick={async () => {
+            const pong = await test();
+            alert(pong);
+          }}
+        >
+          pong
+        </button>
       </div>
     </div>
   );
