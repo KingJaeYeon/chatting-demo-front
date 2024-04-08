@@ -1,17 +1,13 @@
 import { create } from "zustand";
-import { login, logout } from "../service/authService.ts";
+import { login, logout, register } from "../service/authService.ts";
+import { Login, Register } from "../service/type/Auth.ts";
 
 type Props = {
   user: any;
   isLogin: boolean;
   init: (user: any) => any;
-  login: ({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) => Promise<void>;
+  login: ({ email, password }: Login) => Promise<void>;
+  register: ({ displayName, email, password, icon }: Register) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -23,6 +19,10 @@ const useAuthStore = create<Props>((setState) => ({
   },
   login: async ({ email, password }) => {
     await login({ email, password });
+    window.location.href = `${import.meta.env.VITE_WEB_URL}`;
+  },
+  register: async ({ email, password, icon, displayName }) => {
+    await register({ displayName, email, password, icon });
     window.location.href = `${import.meta.env.VITE_WEB_URL}`;
   },
   logout: async () => {

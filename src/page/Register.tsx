@@ -1,11 +1,11 @@
 import Add from "../img/addAvatar.png";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { register } from "../service/authService.ts";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../store/authStore.ts";
 
 export function Register() {
   const [err, setErr] = useState(false);
-  const navigate = useNavigate();
+  const { register } = useAuthContext();
   async function handleSubmit(e: any) {
     e.preventDefault();
     const displayName = e.target[0].value;
@@ -14,7 +14,6 @@ export function Register() {
     const file = e.target[3].files[0];
     try {
       await register({ displayName, email, password, icon: file });
-      // navigate("/login");
     } catch (e) {
       setErr(true);
     }
