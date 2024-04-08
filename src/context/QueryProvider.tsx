@@ -20,7 +20,6 @@ export function QueryProvider({ children }: { children: React.ReactNode }) {
   const access = Cookies.get("access");
   const user = parsePayload(access);
   const { init } = useAuthContext();
-  console.log(user);
   const [loading, setLoading] = useState(true);
   useLayoutEffect(() => {
     return () => {
