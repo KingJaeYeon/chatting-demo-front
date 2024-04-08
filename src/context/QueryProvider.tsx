@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { parsePayload } from "../lib/util.ts";
@@ -22,9 +22,11 @@ export function QueryProvider({ children }: { children: React.ReactNode }) {
   const { init } = useAuthContext();
   console.log(user);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
+  useLayoutEffect(() => {
     return () => {
-      init(user);
+      if (user) {
+        init(user);
+      }
       setLoading(false);
     };
   }, []);

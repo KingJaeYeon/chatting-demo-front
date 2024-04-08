@@ -35,3 +35,10 @@ export function login(data: Login) {
     },
   });
 }
+
+export function logout() {
+  return request({
+    method: "POST",
+    url: "auth/logout",
+  });
+}
