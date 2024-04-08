@@ -15,6 +15,7 @@ import { Login } from "./page/Login.tsx";
 import { Register } from "./page/Register.tsx";
 import { ChatContext } from "./context/ChatContext.tsx";
 import { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "@/context/theme-provider.tsx";
 
 const PrivateRoute = ({ children }: { children: any }) => {
   const { user } = useAuthContext();
@@ -41,8 +42,10 @@ function App() {
   return (
     <QueryProvider>
       <ChatContext>
-        <Toaster />
-        <RouterProvider router={router} />
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <Toaster />
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </ChatContext>
     </QueryProvider>
   );
