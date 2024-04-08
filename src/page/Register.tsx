@@ -11,9 +11,8 @@ export function Register() {
     const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
-    const file = e.target[3].files[0];
     try {
-      await register({ displayName, email, password, icon: file });
+      await register({ displayName, email, password });
     } catch (e) {
       setErr(true);
     }
@@ -29,10 +28,10 @@ export function Register() {
           <input type="email" placeholder={"email"} />
           <input type="password" placeholder={"password"} />
           <input type="file" id="file" hidden={true} />
-          <label htmlFor={"file"}>
-            <img src={Add} alt={"add image"} />
-            <span>Add an avatar</span>
-          </label>
+          {/*<label htmlFor={"file"}>*/}
+          {/*  <img src={Add} alt={"add image"} />*/}
+          {/*  <span>Add an avatar</span>*/}
+          {/*</label>*/}
           <button>Sign up</button>
           {err && <span>Something went wrong</span>}
         </form>

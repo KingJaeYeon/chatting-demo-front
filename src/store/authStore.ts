@@ -7,7 +7,7 @@ type Props = {
   isLogin: boolean;
   init: (user: any) => any;
   login: ({ email, password }: Login) => Promise<void>;
-  register: ({ displayName, email, password, icon }: Register) => Promise<void>;
+  register: ({ displayName, email, password }: Register) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -21,8 +21,8 @@ const useAuthStore = create<Props>((setState) => ({
     await login({ email, password });
     window.location.href = `${import.meta.env.VITE_WEB_URL}`;
   },
-  register: async ({ email, password, icon, displayName }) => {
-    await register({ displayName, email, password, icon });
+  register: async ({ email, password, displayName }) => {
+    await register({ displayName, email, password });
     window.location.href = `${import.meta.env.VITE_WEB_URL}`;
   },
   logout: async () => {

@@ -1,4 +1,5 @@
 import { useAuthContext } from "../store/authStore.ts";
+import DefaultIcon from "../assets/guest.png";
 export function Navbar() {
   const { user, logout } = useAuthContext();
 
@@ -7,8 +8,12 @@ export function Navbar() {
       <span className={"logo"}>KingPj chat</span>
       <div className={"user"}>
         <img
-          src={import.meta.env.VITE_CLOUDFLARE_PUBLIC_URL + user?.icon}
-          alt=""
+          src={
+            user.icon
+              ? import.meta.env.VITE_CLOUDFLARE_PUBLIC_URL + user.icon
+              : DefaultIcon
+          }
+          alt="profile"
         />
         <span>{user?.displayName}</span>
         <button onClick={logout}>logout</button>
