@@ -1,20 +1,17 @@
 import { useState } from "react";
 import { useAuthContext } from "../store/authStore.ts";
-import { Link, useNavigate } from "react-router-dom";
-import { login, test } from "../service/authService.ts";
+import { Link } from "react-router-dom";
+import { test } from "../service/authService.ts";
 
 export function Login() {
   const [err, setErr] = useState(false);
-  const navigate = useNavigate();
-  const { init } = useAuthContext();
+  const { login } = useAuthContext();
   async function handleSubmit(e: any) {
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
     try {
-      const res = await login({ email, password });
-      init(res.user);
-      // navigate("/");
+      await login({ email, password });
     } catch (e) {
       setErr(true);
     }
