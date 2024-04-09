@@ -19,7 +19,7 @@ import { ThemeProvider } from "@/context/theme-provider.tsx";
 
 const PrivateRoute = ({ children }: { children: any }) => {
   const { user } = useAuthContext();
-  return user ? children : <Navigate to="/login" />;
+  return user ? children : <Navigate to="/sign-in" />;
 };
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,8 +33,8 @@ const router = createBrowserRouter(
         }
       />
       ,
-      <Route path={"/login"} element={<Login />} />,
-      <Route path={"/register"} element={<Register />} />,
+      <Route path={"/sign-in"} element={<Login />} />,
+      <Route path={"/sign-up"} element={<Register />} />,
     </>,
   ),
 );
