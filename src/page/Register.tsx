@@ -28,8 +28,8 @@ export function Register() {
   }
 
   return (
-    <div className={"flex h-[100dvh] justify-center items-center"}>
-      <Card className="mx-auto max-w-sm">
+    <div className={"flex h-[100dvh] justify-center items-center w-full"}>
+      <Card className="mx-auto max-w-sm w-full">
         <CardHeader>
           <CardTitle className="text-xl">Sign Up</CardTitle>
           <CardDescription>

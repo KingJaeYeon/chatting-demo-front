@@ -74,7 +74,7 @@ export function Login() {
           alt="Image"
           width="1920"
           height="1080"
-          className="max-h-[100dvh] w-full dark:brightness-[0.2] dark:grayscale"
+          className="max-h-[100dvh] w-full dark:brightness-[0.5] dark:grayscale"
         />
       </div>
     </div>
