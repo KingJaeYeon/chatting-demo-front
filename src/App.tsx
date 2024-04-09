@@ -16,6 +16,9 @@ import { Register } from "./page/Register.tsx";
 import { ChatContext } from "./context/ChatContext.tsx";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/context/theme-provider.tsx";
+import { Test } from "@/page/Test.tsx";
+import { TooltipProvider } from "@/components/ui/tooltip.tsx";
+import Root from "@/page/Root.tsx";
 
 const PrivateRoute = ({ children }: { children: any }) => {
   const { user } = useAuthContext();
@@ -28,10 +31,13 @@ const router = createBrowserRouter(
         path={"/"}
         element={
           <PrivateRoute>
-            <Home />
+            <Root />
           </PrivateRoute>
         }
-      />
+      >
+        <Route element={<Home />} index />
+        <Route element={<Test />} path={"/h"} />
+      </Route>
       ,
       <Route path={"/sign-in"} element={<Login />} />,
       <Route path={"/sign-up"} element={<Register />} />,
@@ -43,8 +49,10 @@ function App() {
     <QueryProvider>
       <ChatContext>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <Toaster />
-          <RouterProvider router={router} />
+          <TooltipProvider>
+            <Toaster />
+            <RouterProvider router={router} />
+          </TooltipProvider>
         </ThemeProvider>
       </ChatContext>
     </QueryProvider>
