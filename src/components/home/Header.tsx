@@ -28,7 +28,13 @@ export default function Header({
             친구
           </ToggleGroupItem>
           <ToggleGroupItem
-            value="friend2"
+            value="waitFriend"
+            className="justify-start flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+          >
+            대기 중
+          </ToggleGroupItem>
+          <ToggleGroupItem
+            value="addFriend"
             className="justify-start flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
           >
             친구 추가하기

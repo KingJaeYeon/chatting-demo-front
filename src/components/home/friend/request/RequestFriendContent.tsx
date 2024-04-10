@@ -1,13 +1,17 @@
+import RequestAddFriend from "@/components/home/friend/request/RequestAddFriend.tsx";
 import {
-  Ban,
   AArrowDownIcon,
+  AccessibilityIcon,
+  Ban,
   BanIcon,
   BotMessageSquareIcon,
-  AccessibilityIcon,
 } from "lucide-react";
-import { Link } from "react-router-dom";
-export default function FriendList({ filterKey }: { filterKey: string }) {
-  const dummyData = [
+import NoResponse from "@/components/home/friend/NoResponse.tsx";
+import { cn } from "@/lib/utils.ts";
+import RequestListContainer from "@/components/home/friend/request/RequestListContainer.tsx";
+
+export default function RequestFriendContent() {
+  const dummyResponse = [
     {
       id: 1,
       name: "John Doe",
@@ -111,32 +115,23 @@ export default function FriendList({ filterKey }: { filterKey: string }) {
       status: "online",
     },
   ];
-
-  const filteredData = filterKey
-    ? dummyData.filter((data) =>
-        data.name.toLowerCase().includes(filterKey.toLowerCase()),
-      )
-    : dummyData;
-
-  return filteredData.map((data) => (
-    <Link
-      to={`/@me/${data.id}`}
-      key={data.id + data.name}
-      className="flex items-center gap-2 p-2"
-    >
-      <div className="flex items-center justify-center rounded-full bg-primary">
-        {data.profile}
-      </div>
-      <div>
-        <p className="font-semibold">{data.name}</p>
-        <p
-          className={`text-xs ${
-            data.status === "online" ? "text-primary" : "text-muted-foreground"
-          }`}
-        >
-          {data.status}
-        </p>
-      </div>
-    </Link>
-  ));
+  const isResponseExist = dummyResponse.length > 0;
+  return (
+    <div className={"flex-1 flex flex-col"}>
+      <RequestAddFriend />
+      <div className={"border-t my-6"} id={"hr"} />
+      <main
+        className={cn(
+          "px-8 h-full relative flex",
+          !isResponseExist && "justify-center",
+        )}
+      >
+        {!isResponseExist ? (
+          <NoResponse txt={"친구를 기다리고 있어요!!"} />
+        ) : (
+          <RequestListContainer data={dummyResponse} />
+        )}
+      </main>
+    </div>
+  );
 }

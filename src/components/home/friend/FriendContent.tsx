@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input.tsx";
-import FriendList from "@/components/home/FriendList.tsx";
+import FriendList from "@/components/home/friend/FriendList.tsx";
 import { useState } from "react";
 
 export default function FriendContent() {
@@ -22,7 +22,7 @@ export default function FriendContent() {
         {search ? `"${search}"이 포함된 친구` : "모든 친구"}
       </p>
       <div className={"relative overflow-scroll h-[calc(100%-110px)]"}>
-        <div className={"absolute"}>
+        <div className={"absolute max-w-[1200px] w-full"}>
           <FriendList filterKey={search} />
         </div>
       </div>
