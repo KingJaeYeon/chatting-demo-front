@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import "./style.scss";
-import { Home } from "./page/Home.tsx";
 
 import { QueryProvider } from "./context/QueryProvider.tsx";
 import { useAuthContext } from "./store/authStore.ts";
@@ -16,9 +15,9 @@ import { Register } from "./page/Register.tsx";
 import { ChatContext } from "./context/ChatContext.tsx";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/context/theme-provider.tsx";
-import { Test } from "@/page/Test.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import Root from "@/page/Root.tsx";
+import ErrorPage from "@/page/ErrorPage.tsx";
 
 const PrivateRoute = ({ children }: { children: any }) => {
   const { user } = useAuthContext();
@@ -34,9 +33,14 @@ const router = createBrowserRouter(
             <Root />
           </PrivateRoute>
         }
+        errorElement={<ErrorPage />}
       >
-        <Route element={<Home />} index />
-        <Route element={<Test />} path={"/h"} />
+        <Route index element={<Navigate replace to="/@me" />} />
+        <Route element={<div>@me</div>} path={"/@me"} />
+        <Route element={<div>/@me/:id</div>} path={"/@me/:id"} />
+        <Route element={<div>:id</div>} path={"/:id"} />
+
+        <Route element={<div>fdsf</div>} path={"/h"} />
       </Route>
       ,
       <Route path={"/sign-in"} element={<Login />} />,
