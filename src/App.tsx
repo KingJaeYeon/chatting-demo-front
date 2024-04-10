@@ -18,6 +18,7 @@ import { ThemeProvider } from "@/context/theme-provider.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import Root from "@/page/Root.tsx";
 import ErrorPage from "@/page/ErrorPage.tsx";
+import { Home } from "@/page/Home.tsx";
 
 const PrivateRoute = ({ children }: { children: any }) => {
   const { user } = useAuthContext();
@@ -36,7 +37,7 @@ const router = createBrowserRouter(
         errorElement={<ErrorPage />}
       >
         <Route index element={<Navigate replace to="/@me" />} />
-        <Route element={<div>@me</div>} path={"/@me"} />
+        <Route element={<Home />} path={"/@me"} />
         <Route element={<div>/@me/:id</div>} path={"/@me/:id"} />
         <Route element={<div>:id</div>} path={"/:id"} />
 

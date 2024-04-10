@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils.ts";
 
 export function Navbar() {
   return (
-    <aside className="inset-y-0 left-0 z-10 w-[72px] flex-col border-r bg-background flex">
+    <aside className="inset-y-0 left-0 z-10 min-w-[72px] flex-col border-r bg-background flex">
       <nav className="flex flex-col items-center gap-4 px-2 py-5">
         <Link
           to="/@me"

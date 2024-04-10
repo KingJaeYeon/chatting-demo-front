@@ -12,7 +12,7 @@ export default function Root() {
       <Navbar />
       {pathname.includes("/@me") ? <HomeSidebar /> : <RoomsSidebar />}
       <UserInfo />
-      <div className="flex gap-4 h-[100dvh] pl-[72px]">
+      <div className="flex gap-4 h-[100dvh] flex-1">
         <Outlet />
       </div>
     </div>

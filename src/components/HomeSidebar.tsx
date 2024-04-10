@@ -42,7 +42,7 @@ export default function HomeSidebar() {
   ];
   const { pathname } = useLocation();
   return (
-    <div className="border-r bg-muted/40 w-[240px]">
+    <div className="border-r bg-muted/40 min-w-[240px]">
       <div className="flex h-[calc(100%-53px)] max-h-screen flex-col gap-2">
         <div className="flex items-center border-b h-[60px] px-6">
           <Link to="/@me" className="flex items-center gap-2 font-semibold">
