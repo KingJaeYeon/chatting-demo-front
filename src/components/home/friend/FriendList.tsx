@@ -21,7 +21,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu.tsx";
-import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
+
 export default function FriendList({ filterKey }: { filterKey: string }) {
   const dummyData = [
     {
@@ -179,10 +179,6 @@ export default function FriendList({ filterKey }: { filterKey: string }) {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant={"secondary"}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    alert("dd");
-                  }}
                   className={cn(
                     "flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:text-amber-200 px-0 z-10",
                   )}
@@ -192,10 +188,20 @@ export default function FriendList({ filterKey }: { filterKey: string }) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem>Export</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Trash</DropdownMenuItem>
+                <DropdownMenuItem onClick={(e) => e.stopPropagation()}>
+                  영상 통화 시작하기
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={(e) => e.stopPropagation()}>
+                  음성 통화 시작하기
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={(e) => e.stopPropagation()}
+                  className={
+                    "text-rose-600 dark:focus:bg-red-700 dark:focus:text-white"
+                  }
+                >
+                  친구 삭제하기
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </TooltipTrigger>
