@@ -161,7 +161,9 @@ export default function WaitingContent() {
             <p className="text-sm text-muted-foreground transition-colors hover:text-foreground pt-2 pb-4">
               {`대기 중 - ${filteredData.length}명`}
             </p>
-            <div className={"relative overflow-scroll h-[calc(100%-110px)]"}>
+            <div
+              className={"relative overflow-scroll h-[calc(100%-110px)] scroll"}
+            >
               <div className={"absolute max-w-[1200px] w-full"}>
                 <WaitingList data={filteredData} />
               </div>

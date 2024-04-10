@@ -6,7 +6,9 @@ export default function RequestListContainer({ data }: { data: any }) {
         {`친구 요청 목록 (${data.length})`}
       </p>
       <div
-        className={"relative overflow-scroll h-[calc(100%-70px)] w-[1200px]"}
+        className={
+          "relative overflow-scroll h-[calc(100%-70px)] w-[1200px] scroll"
+        }
       >
         <div className={"absolute max-w-[1200px] w-full"}>
           <RequestList data={data} />

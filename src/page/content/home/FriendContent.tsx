@@ -21,7 +21,7 @@ export default function FriendContent() {
       <p className="text-sm text-muted-foreground transition-colors hover:text-foreground pt-2 pb-4">
         {search ? `"${search}"이 포함된 친구` : "모든 친구"}
       </p>
-      <div className={"relative overflow-scroll h-[calc(100%-110px)]"}>
+      <div className={"relative overflow-scroll h-[calc(100%-110px)] scroll"}>
         <div className={"absolute max-w-[1200px] w-full"}>
           <FriendList filterKey={search} />
         </div>

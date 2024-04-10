@@ -4,8 +4,24 @@ import {
   BanIcon,
   BotMessageSquareIcon,
   AccessibilityIcon,
+  MessageSquareText,
+  EllipsisVertical,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip.tsx";
+import { Button } from "@/components/ui/button.tsx";
+import { cn } from "@/lib/utils.ts";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu.tsx";
+import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
 export default function FriendList({ filterKey }: { filterKey: string }) {
   const dummyData = [
     {
@@ -111,7 +127,7 @@ export default function FriendList({ filterKey }: { filterKey: string }) {
       status: "online",
     },
   ];
-
+  const navigate = useNavigate();
   const filteredData = filterKey
     ? dummyData.filter((data) =>
         data.name.toLowerCase().includes(filterKey.toLowerCase()),
@@ -122,20 +138,69 @@ export default function FriendList({ filterKey }: { filterKey: string }) {
     <Link
       to={`/@me/${data.id}`}
       key={data.id + data.name}
-      className="flex items-center gap-2 p-2 w-full hover:bg-background hover:bg-opacity-10 rounded-lg transition-all"
+      className="flex items-center gap-2 p-2 w-full hover:bg-background hover:bg-opacity-10 rounded-lg transition-all justify-between"
     >
-      <div className="flex items-center justify-center rounded-full bg-primary">
-        {data.profile}
+      <div className={"flex items-center gap-2"}>
+        <div className="flex items-center justify-center rounded-full bg-primary">
+          {data.profile}
+        </div>
+        <div>
+          <p className="font-semibold">{data.name}</p>
+          <p
+            className={`text-xs ${
+              data.status === "online"
+                ? "text-primary"
+                : "text-muted-foreground"
+            }`}
+          >
+            {data.status}
+          </p>
+        </div>
       </div>
-      <div>
-        <p className="font-semibold">{data.name}</p>
-        <p
-          className={`text-xs ${
-            data.status === "online" ? "text-primary" : "text-muted-foreground"
-          }`}
-        >
-          {data.status}
-        </p>
+      <div className={"flex gap-[10px]"}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant={"secondary"}
+              onClick={() => navigate(`/@me/${data.id}`)}
+              className={cn(
+                "flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:text-amber-200 px-0",
+              )}
+            >
+              <MessageSquareText className="h-5 w-5" />
+              <span className="sr-only">메세지 보내기</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="top">메세지 보내기</TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant={"secondary"}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    alert("dd");
+                  }}
+                  className={cn(
+                    "flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:text-amber-200 px-0 z-10",
+                  )}
+                >
+                  <EllipsisVertical className="h-5 w-5" />
+                  <span className="sr-only">기타</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem>Export</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Trash</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </TooltipTrigger>
+          <TooltipContent side="top">기타</TooltipContent>
+        </Tooltip>
       </div>
     </Link>
   ));

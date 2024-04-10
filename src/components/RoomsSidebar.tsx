@@ -19,7 +19,7 @@ export default function RoomsSidebar() {
             <span className="sr-only">Toggle notifications</span>
           </Button>
         </div>
-        <div className="flex-1 overflow-auto">
+        <div className="flex-1 overflow-auto scroll">
           <nav className="grid items-start text-sm font-medium px-4">
             <ToggleGroup
               type="single"
