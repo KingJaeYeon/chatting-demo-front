@@ -30,7 +30,7 @@ function ItemRow({ item }: { item: any }) {
         </div>
         <div>
           <p className="font-semibold">{item.name}</p>
-          <CardDescription className={"text-sm"}>
+          <CardDescription className={"text-xs"}>
             {"보낸 친구 요청"}
           </CardDescription>
         </div>
