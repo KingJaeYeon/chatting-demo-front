@@ -1,6 +1,6 @@
-import DefaultIcon from "@/assets/guest.png";
 import { Button } from "@/components/ui/button.tsx";
 import { useAuthContext } from "@/store/authStore.ts";
+import AvatarStateView from "@/components/AvatarStateView.tsx";
 
 export default function UserInfo() {
   const { user, logout } = useAuthContext();
@@ -11,15 +11,7 @@ export default function UserInfo() {
       }
     >
       <div className={"flex items-center"}>
-        <img
-          className={"h-[30px] w-[30px] rounded-[999px] object-cover bg-white"}
-          src={
-            user.icon
-              ? import.meta.env.VITE_CLOUDFLARE_PUBLIC_URL + user.icon
-              : DefaultIcon
-          }
-          alt="profile"
-        />
+        <AvatarStateView user={user} />
         <span className={"pl-[8px] text-[14px]"}>{user?.displayName}</span>
       </div>
       <Button className={"h-7"} onClick={logout}>

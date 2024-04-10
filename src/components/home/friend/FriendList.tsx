@@ -21,6 +21,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu.tsx";
+import AvatarStateView from "@/components/AvatarStateView.tsx";
 
 export default function FriendList({ filterKey }: { filterKey: string }) {
   const dummyData = [
@@ -141,9 +142,7 @@ export default function FriendList({ filterKey }: { filterKey: string }) {
       className="flex items-center gap-2 p-2 w-full hover:bg-background hover:bg-opacity-10 rounded-lg transition-all justify-between"
     >
       <div className={"flex items-center gap-2"}>
-        <div className="flex items-center justify-center rounded-full bg-primary">
-          {data.profile}
-        </div>
+        <AvatarStateView user={data} />
         <div>
           <p className="font-semibold">{data.name}</p>
           <p

@@ -8,9 +8,12 @@ import {
   BotMessageSquareIcon,
   AccessibilityIcon,
   Home,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button.tsx";
 import { cn } from "@/lib/utils.ts";
+import { useState } from "react";
+import AvatarStateView from "@/components/AvatarStateView.tsx";
 
 export default function HomeSidebar() {
   const dummyUser = [
@@ -61,7 +64,7 @@ export default function HomeSidebar() {
             <p className="text-sm text-muted-foreground transition-colors hover:text-foreground my-2">
               다이렉트 메세지
             </p>
-            <div className={"flex flex-col w-full items-start"}>
+            <div className={"flex flex-col w-full items-start gap-[1px]"}>
               {dummyUser.map((user) => (
                 <UserCard {...user} isActive={pathname === `/@me/${user.id}`} />
               ))}
@@ -92,27 +95,46 @@ function FriendsButton({ isActive }: { isActive: boolean }) {
 function UserCard({
   id,
   name,
-  icon,
   isActive,
 }: {
   id: number;
   name: string;
-  icon: any;
   isActive: boolean;
 }) {
+  const [hover, setHover] = useState(false);
   const className = isActive
     ? "bg-accent text-accent-foreground"
     : "text-muted-foreground";
+
+  function removeItemHandler() {
+    alert("remove");
+  }
   return (
     <Link
       to={`/@me/${id.toString()}`}
       className={cn(
         className,
-        "justify-start w-full flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+        "justify-between w-full flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary hover:bg-accent",
       )}
+      onMouseOver={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
-      {icon}
-      {name}
+      <div className={"flex gap-3 items-center"}>
+        <AvatarStateView user={{}} />
+        {name}
+      </div>
+      {hover && (
+        <Button
+          variant={"ghost"}
+          onClick={removeItemHandler}
+          className={cn(
+            "flex h-5 w-5 items-center justify-center rounded-full transition-colors px-0 py-0",
+          )}
+        >
+          <X className="h-5 w-5" />
+          <span className="sr-only">거절</span>
+        </Button>
+      )}
     </Link>
   );
 }
