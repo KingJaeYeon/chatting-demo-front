@@ -8,16 +8,17 @@ import { Button } from "@/components/ui/button.tsx";
 import NavImage from "@/assets/bard.avif";
 
 export function Login() {
-  const [err, setErr] = useState(false);
+  const [err, setErr] = useState("");
   const { login } = useAuthContext();
   async function handleSubmit(e: any) {
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
     try {
+      setErr("");
       await login({ email, password });
-    } catch (e) {
-      setErr(true);
+    } catch (e: any) {
+      setErr(e.message);
     }
   }
   return (
@@ -52,7 +53,7 @@ export function Login() {
               </div>
               <Input id="password" type="password" required />
             </div>
-            {err && <span>Something went wrong</span>}
+            {err && <span>{err}</span>}
             <Button type="submit" className="w-full">
               Login
             </Button>

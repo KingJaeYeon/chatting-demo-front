@@ -13,6 +13,7 @@ const client = axios.create({
 
 client.interceptors.response.use(async (res) => {
   const { status } = res;
+
   if (status === 401) {
     // await refreshTokens();
     throw new Error("refresh token", { cause: { status: status } });
@@ -32,8 +33,8 @@ const onError = function (error: any) {
     console.log("Error Response:", error.response);
   }
   // 에러 메시지 로깅
-  console.log("Error Message:", error.message);
-  return Promise.reject(error);
+  console.log("Error Message:", error.message.data);
+  return Promise.reject(error.response.data);
 };
 
 export const request = function (options: AxiosRequestConfig) {

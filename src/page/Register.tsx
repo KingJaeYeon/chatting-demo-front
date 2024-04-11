@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button.tsx";
 
 export function Register() {
-  const [err, setErr] = useState(false);
+  const [err, setErr] = useState("");
   const { register } = useAuthContext();
   async function handleSubmit(e: any) {
     e.preventDefault();
@@ -22,10 +22,11 @@ export function Register() {
     const email = e.target[2].value;
     const password = e.target[3].value;
     try {
+      setErr("");
       await register({ username, email, password, displayName });
-    } catch (e) {
+    } catch (e: any) {
       console.log(e);
-      setErr(true);
+      setErr(e.message);
     }
   }
 
@@ -74,7 +75,7 @@ export function Register() {
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" />
             </div>
-            {err && <span>Something went wrong</span>}
+            {err && <span>{err}</span>}
             <Button type="submit" className="w-full">
               Create an account
             </Button>
