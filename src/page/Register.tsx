@@ -17,12 +17,14 @@ export function Register() {
   const { register } = useAuthContext();
   async function handleSubmit(e: any) {
     e.preventDefault();
-    const displayName = e.target[0].value;
-    const email = e.target[1].value;
-    const password = e.target[2].value;
+    const username = e.target[0].value;
+    const displayName = e.target[1].value;
+    const email = e.target[2].value;
+    const password = e.target[3].value;
     try {
-      await register({ displayName, email, password });
+      await register({ username, email, password, displayName });
     } catch (e) {
+      console.log(e);
       setErr(true);
     }
   }
@@ -39,12 +41,24 @@ export function Register() {
         <CardContent>
           <form className="grid gap-4" onSubmit={handleSubmit}>
             <div className="grid gap-2">
+              <Label htmlFor="text">Username</Label>
+              <Input
+                id="text"
+                type="text"
+                placeholder="username"
+                required
+                maxLength={32}
+                minLength={2}
+              />
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="text">Display Name</Label>
               <Input
                 id="text"
                 type="text"
-                placeholder="display name"
-                required
+                placeholder="Display name"
+                maxLength={32}
+                minLength={2}
               />
             </div>
             <div className="grid gap-2">

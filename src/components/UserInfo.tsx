@@ -12,7 +12,9 @@ export default function UserInfo() {
     >
       <div className={"flex items-center"}>
         <AvatarStateView user={user} />
-        <span className={"pl-[8px] text-[14px]"}>{user?.displayName}</span>
+        <span className={"pl-[8px] text-[14px]"}>
+          {user?.displayName ? user?.displayName : user?.username}
+        </span>
       </div>
       <Button className={"h-7"} onClick={logout}>
         logout

@@ -1,7 +1,8 @@
 export type Register = {
   email: string;
   password: string;
-  displayName: string;
+  username: string;
+  displayName?: string;
 };
 
 export type Login = {
