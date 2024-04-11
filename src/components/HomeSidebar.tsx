@@ -106,7 +106,8 @@ function UserCard({
     ? "bg-accent text-accent-foreground"
     : "text-muted-foreground";
 
-  function removeItemHandler() {
+  function removeItemHandler(e: any) {
+    e.preventDefault();
     alert("remove");
   }
   return (
