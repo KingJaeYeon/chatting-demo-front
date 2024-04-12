@@ -1,5 +1,5 @@
 import { request } from "./axios.ts";
-import { Login, Register } from "./type/Auth.ts";
+import { Login, Register } from "../type/Auth.ts";
 
 export function test() {
   return request({

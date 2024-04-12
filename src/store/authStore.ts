@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { login, logout, register } from "../service/authService.ts";
+import { login, logout, register } from "../service/axios/authService.ts";
 import { Login, Register } from "../service/type/Auth.ts";
 
 type Props = {
