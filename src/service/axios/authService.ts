@@ -30,3 +30,10 @@ export function logout() {
     url: "auth/logout",
   });
 }
+
+export function refreshTokens() {
+  return request({
+    method: "POST",
+    url: "auth/refresh",
+  });
+}
