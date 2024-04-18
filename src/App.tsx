@@ -22,7 +22,7 @@ import { Home } from "@/page/Home.tsx";
 
 const PrivateRoute = ({ children }: { children: any }) => {
   const { user } = useAuthContext();
-  console.log(user);
+
   return user ? children : <Navigate to="/sign-in" />;
 };
 const router = createBrowserRouter(

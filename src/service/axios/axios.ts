@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { refreshTokens } from "@/service/axios/authService.ts";
 
 const client = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -15,7 +16,7 @@ client.interceptors.response.use(async (res) => {
   const { status } = res;
 
   if (status === 401) {
-    // await refreshTokens();
+    await refreshTokens();
     throw new Error("refresh token", { cause: { status: status } });
   }
   return res;

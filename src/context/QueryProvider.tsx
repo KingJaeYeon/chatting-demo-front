@@ -18,13 +18,13 @@ const config = {
 export function QueryProvider({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient(config);
   const access = Cookies.get("access");
-  const user = parsePayload(access);
+  const token = parsePayload(access);
   const { init } = useAuthContext();
   const [loading, setLoading] = useState(true);
   useLayoutEffect(() => {
     return () => {
-      if (user) {
-        init(user);
+      if (token) {
+        init(token);
       }
       setLoading(false);
     };

@@ -5,7 +5,7 @@ import { Login, Register } from "../service/type/Auth.ts";
 type Props = {
   user: any;
   isLogin: boolean;
-  init: (user: any) => any;
+  init: (token: any) => any;
   login: ({ email, password }: Login) => Promise<void>;
   register: ({
     username,
@@ -19,8 +19,8 @@ type Props = {
 const useAuthStore = create<Props>((setState) => ({
   user: null,
   isLogin: false,
-  init: (user) => {
-    setState({ user, isLogin: true });
+  init: (token) => {
+    setState({ user: token.user, isLogin: true });
   },
   login: async ({ email, password }) => {
     await login({ email, password });
