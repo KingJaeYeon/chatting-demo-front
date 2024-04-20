@@ -7,17 +7,16 @@ import {
 import { Button } from "@/components/ui/button.tsx";
 import { Mic, Paperclip } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useAuthContext } from "@/store/authStore.ts";
 import useSocket from "@/hooks/useSocket.ts";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar.tsx";
+import { useAuthContext } from "@/store/authStore.ts";
 
 export default function ChattingRoom() {
   const scrollTo = useRef<any>(null);
   const socket = useSocket();
-  const { user } = useAuthContext();
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<any[]>([]);
   const [text, setText] = useState("");
-  const [num, setNum] = useState(20);
-
+  const { user } = useAuthContext();
   useEffect(() => {
     scrollTo.current.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -43,27 +42,28 @@ export default function ChattingRoom() {
       // shift 키가 눌리지 않은 상태에서 Enter만 처리
       e.preventDefault(); // 기본 이벤트 방지
       e.stopPropagation(); // 이벤트 버블링 중지
-      socket?.emit("new_user", text, (data) => {
+      socket?.emit("new_user", { message: text, user: user.id }, (data) => {
         setMessages((messages) => [...messages, data]);
       });
       setText("");
     }
   };
-  const reverse = [...messages]?.reverse();
+  const reverseMessage = [...messages]?.reverse();
   return (
     <main className="grid flex-1 gap-4 overflow-auto md:grid-cols-2 lg:grid-cols-3">
-      <button onClick={() => setNum((e) => e + 1)}>dd</button>
-      <div className="relative flex h-[100dvh] min-h-[50vh] flex-col rounded-xl bg-muted/50 p-6 lg:col-span-2">
+      <div className="relative flex h-[100dvh] min-h-[50vh] flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2">
         <div className="flex-1 overflow-auto scroll flex-col-reverse flex">
           <div ref={scrollTo} />
-          {reverse?.map((value) => <ChatMessage index={value} />)}
+          {reverseMessage?.map((message, index) => (
+            <ChatMessage {...message} key={message.value} />
+          ))}
         </div>
         <div className="p-[11px] h-[44px] max-h-full flex relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring">
           <Textarea
             id="message"
             onKeyUp={onSendMessage}
             placeholder="Type your message here..."
-            className="resize-none border-0 shadow-none focus-visible:ring-0 py-0 overflow-hidden"
+            className="resize-none border-0 shadow-none focus-visible:ring-0 py-0 overflow-hidden h-[22px]"
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
@@ -103,10 +103,43 @@ function ChatMessage(props: any) {
   //           <img src={photoURL} alt={'User Photo'}/>
   //         </div>
   // )
+  console.log(props);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [comment, setComment] = useState(props.message);
+  const handleResizeHeight = (e: any) => {
+    if (textareaRef?.current) {
+      textareaRef.current.style.height = `auto`;
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + `px`;
+    }
+    setComment(e.target.value);
+  };
+
+  useEffect(() => {
+    if (textareaRef?.current) {
+      textareaRef.current.style.height = `auto`;
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + `px`;
+    }
+  }, []);
   return (
-    <div className={"dd"}>
-      <p>{props.index}</p>
-      <img src={""} alt={"User Photo"} />
+    <div className={"flex border my-1 gap-4 p-5"}>
+      <Avatar>
+        <AvatarFallback>dds</AvatarFallback>
+      </Avatar>
+      <div className={"flex flex-col w-full gap-2"}>
+        <div>{props.user}</div>
+        <textarea
+          ref={textareaRef}
+          className={
+            "flex h-full w-full resize-none p-5 text-black outline-none"
+          }
+          readOnly={true}
+          onChange={handleResizeHeight}
+        >
+          {comment}
+        </textarea>
+      </div>
     </div>
   );
 }
