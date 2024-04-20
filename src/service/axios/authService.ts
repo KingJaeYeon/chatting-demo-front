@@ -4,7 +4,7 @@ import { Login, Register } from "../type/Auth.ts";
 export function test() {
   return request({
     method: "GET",
-    url: "/",
+    url: "/user/profile",
   });
 }
 

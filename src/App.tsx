@@ -19,6 +19,7 @@ import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import Root from "@/page/Root.tsx";
 import ErrorPage from "@/page/ErrorPage.tsx";
 import { Home } from "@/page/Home.tsx";
+import ChattingRoom from "@/page/ChattingRoom.tsx";
 
 const PrivateRoute = ({ children }: { children: any }) => {
   const { user } = useAuthContext();
@@ -39,7 +40,7 @@ const router = createBrowserRouter(
       >
         <Route index element={<Navigate replace to="/@me" />} />
         <Route element={<Home />} path={"/@me"} />
-        <Route element={<div>/@me/:id</div>} path={"/@me/:id"} />
+        <Route element={<ChattingRoom />} path={"/@me/:id"} />
         <Route element={<div>:id</div>} path={"/:id"} />
 
         <Route element={<div>fdsf</div>} path={"/h"} />

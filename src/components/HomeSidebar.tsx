@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { cn } from "@/lib/utils.ts";
 import { useState } from "react";
 import AvatarStateView from "@/components/AvatarStateView.tsx";
+import { test } from "@/service/axios/authService.ts";
 
 export default function HomeSidebar() {
   const dummyUser = [
@@ -108,6 +109,7 @@ function UserCard({
 
   function removeItemHandler(e: any) {
     e.preventDefault();
+    test();
     alert("remove");
   }
   return (

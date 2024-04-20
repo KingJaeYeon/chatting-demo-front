@@ -22,12 +22,10 @@ export function QueryProvider({ children }: { children: React.ReactNode }) {
   const { init } = useAuthContext();
   const [loading, setLoading] = useState(true);
   useLayoutEffect(() => {
-    return () => {
-      if (token) {
-        init(token);
-      }
-      setLoading(false);
-    };
+    if (token) {
+      init(token);
+    }
+    setLoading(false);
   }, []);
 
   if (loading) {
